@@ -2,8 +2,10 @@ import { useState } from "react";
 interface Props {
   items: string[];
   heading: string;
+  // function - (item: string) => void
+  onSelectItem: (item: string) => void;
 }
-function ListGroup({ items, heading }: Props) {
+function ListGroup({ items, heading, onSelectItem }: Props) {
   // hook
   const [selected, setSelected] = useState(-1);
 
@@ -26,6 +28,7 @@ function ListGroup({ items, heading }: Props) {
             // Pass a reference and not call the function
             onClick={() => {
               setSelected(index);
+              onSelectItem(item);
             }}
           >
             {item}
