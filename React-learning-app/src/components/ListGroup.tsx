@@ -1,22 +1,23 @@
 import { useState } from "react";
-
-function ListGroup() {
-  const cities = ["Delhi", "New york", "Paris", "Ottowa", "Karachi"];
-
+interface Props {
+  items: string[];
+  heading: string;
+}
+function ListGroup({ items, heading }: Props) {
   // hook
   const [selected, setSelected] = useState(-1);
 
   const getMessage = () => {
     // better way then ternary operator, use logical and
-    return cities.length === 0 && <p>List is empty</p>;
+    return items.length === 0 && <p>List is empty</p>;
   };
 
   return (
     <>
-      <h1>List Group</h1>
+      <h1>{heading}</h1>
       {getMessage()}
       <ul className="list-group">
-        {cities.map((item, index) => (
+        {items.map((item, index) => (
           <li
             className={
               selected === index ? "list-group-item active" : "list-group-item"
