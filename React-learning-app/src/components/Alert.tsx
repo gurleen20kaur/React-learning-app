@@ -8,7 +8,7 @@ interface Props {
 const Alert = ({ children, onClose }: Props) => {
   return (
     <div className="alert alert-danger alert-dismissible">
-      {children}{" "}
+      {children}
       <button
         type="button"
         className="btn-close"
