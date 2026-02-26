@@ -1,11 +1,18 @@
 import { useForm, type FieldValues } from "react-hook-form";
 
+// use an interface to define shape of this form
+// and let TS know about our input fields
+interface FormData {
+  name: string;
+  age: number;
+}
+
 const Form = () => {
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm();
+  } = useForm<FormData>();
 
   const onSubmit = (data: FieldValues) => console.log(data);
 
