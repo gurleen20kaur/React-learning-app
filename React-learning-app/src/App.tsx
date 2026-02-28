@@ -1,19 +1,19 @@
 import { useState } from "react";
-import Alert from "./components/Alert";
-import Button from "./components/Button";
+import ProductList from "./components/ProductList";
 
 function App() {
-  const BtnText = "My Button";
-  const [alertVisible, setAlertVisible] = useState(false);
-
+  const [category, setCategory] = useState("");
   return (
     <div>
-      {alertVisible && (
-        <Alert onClose={() => setAlertVisible(false)}>
-          Hello <span>World</span>
-        </Alert>
-      )}
-      <Button text={BtnText} onClick={() => setAlertVisible(true)}></Button>
+      <select
+        className="form-select"
+        onChange={(event) => setCategory(event.target.value)}
+      >
+        <option value=""></option>
+        <option value="Clothing">Clothing</option>
+        <option value="Household">Household</option>
+      </select>
+      <ProductList />
     </div>
   );
 }
