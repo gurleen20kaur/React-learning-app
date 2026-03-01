@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-const ProductList = () => {
+const ProductList = ({ category }: { category: string }) => {
   const [products, setProduct] = useState<string[]>([]);
 
   //Using Effect Hook to call the server to fetch the product
@@ -10,9 +10,9 @@ const ProductList = () => {
   // Pass an array of dependencies as a second argument
   // so it is only execute after the initial render
   useEffect(() => {
-    console.log("Fetching products");
+    console.log("Fetching products in", category);
     setProduct(["Clothing", "Household"]);
-  }, []);
+  }, [category]);
 
   return <div>ProductList</div>;
 };
