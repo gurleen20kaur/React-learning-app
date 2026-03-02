@@ -1,6 +1,11 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 
+interface User {
+  id: number;
+  name: string;
+}
+
 function App() {
   const [users, setUsers] = useState([]);
 
@@ -8,8 +13,8 @@ function App() {
   // returns a promise - has method .then
   useEffect(() => {
     axios
-      .get("https://jsonplaceholder.typicode.com/users")
-      .then((res) => console.log(res.data));
+      .get<User[]>("https://jsonplaceholder.typicode.com/users")
+      .then((res) => console.log(res.data[0].name));
   });
   return <div></div>;
 }
