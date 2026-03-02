@@ -16,7 +16,15 @@ function App() {
       .get<User[]>("https://jsonplaceholder.typicode.com/users")
       .then((res) => setUsers(res.data));
   }, []);
-  return <div></div>;
+  return (
+    <div>
+      <ul>
+        {users.map((user) => (
+          <li key={user.id}>{user.name}</li>
+        ))}
+      </ul>
+    </div>
+  );
 }
 
 export default App;
