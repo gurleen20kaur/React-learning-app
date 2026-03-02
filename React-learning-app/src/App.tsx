@@ -7,15 +7,15 @@ interface User {
 }
 
 function App() {
-  const [users, setUsers] = useState([]);
+  const [users, setUsers] = useState<User[]>([]);
 
   // call the server
   // returns a promise - has method .then
   useEffect(() => {
     axios
       .get<User[]>("https://jsonplaceholder.typicode.com/users")
-      .then((res) => console.log(res.data[0].name));
-  });
+      .then((res) => setUsers(res.data));
+  }, []);
   return <div></div>;
 }
 
