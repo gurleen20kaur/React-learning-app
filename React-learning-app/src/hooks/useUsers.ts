@@ -32,7 +32,7 @@ const useUsers = () => {
   }, []);
 
   // return state variables so they can be used in the component
-  return { users, error, isLoading};
+  return { users, error, isLoading, setUsers, setError};
 }
 
 export default useUsers;
