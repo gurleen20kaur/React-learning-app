@@ -1,5 +1,5 @@
-import axios, { CanceledError } from "axios";
 import { useEffect, useState } from "react";
+import apiClient, { CanceledError } from "./services/api-client";
 
 interface User {
   id: number;
@@ -17,7 +17,7 @@ function App() {
     const controller = new AbortController();
 
     setIsLoading(true);
-    axios
+    apiClient
       .get<User[]>("https://jsonplaceholder.typicode.com/users", {
         signal: controller.signal,
       })
@@ -43,7 +43,7 @@ function App() {
     setUsers(users.filter((u) => u.id !== user.id));
 
     // Call server next
-    axios
+    apiClient
       .delete("https://jsonplaceholder.typicode.com/users/" + user.id)
       .catch((err) => {
         setError(err.message);
@@ -58,7 +58,7 @@ function App() {
     setUsers([newUser, ...users]);
 
     // Call the server next
-    axios
+    apiClient
       .post("https://jsonplaceholder.typicode.com/users", newUser)
       .then(({ data: savedUser }) => setUsers([savedUser, ...users]))
       .catch((err) => {
@@ -74,7 +74,7 @@ function App() {
 
     // put = replacing an object
     // patch = updating one or more properties
-    axios
+    apiClient
       .patch(
         "https://jsonplaceholder.typicode.com/users/" + user.id,
         updatedUser,
