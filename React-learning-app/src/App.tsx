@@ -18,7 +18,7 @@ function App() {
 
     setIsLoading(true);
     apiClient
-      .get<User[]>("https://jsonplaceholder.typicode.com/users", {
+      .get<User[]>("/users", {
         signal: controller.signal,
       })
       .then((res) => {
@@ -43,12 +43,10 @@ function App() {
     setUsers(users.filter((u) => u.id !== user.id));
 
     // Call server next
-    apiClient
-      .delete("https://jsonplaceholder.typicode.com/users/" + user.id)
-      .catch((err) => {
-        setError(err.message);
-        setUsers(originalUsers);
-      });
+    apiClient.delete("/users/" + user.id).catch((err) => {
+      setError(err.message);
+      setUsers(originalUsers);
+    });
   };
 
   const addUser = () => {
@@ -59,7 +57,7 @@ function App() {
 
     // Call the server next
     apiClient
-      .post("https://jsonplaceholder.typicode.com/users", newUser)
+      .post("/users", newUser)
       .then(({ data: savedUser }) => setUsers([savedUser, ...users]))
       .catch((err) => {
         setError(err.message);
@@ -74,15 +72,10 @@ function App() {
 
     // put = replacing an object
     // patch = updating one or more properties
-    apiClient
-      .patch(
-        "https://jsonplaceholder.typicode.com/users/" + user.id,
-        updatedUser,
-      )
-      .catch((err) => {
-        setError(err.message);
-        setUsers(originalUsers);
-      });
+    apiClient.patch("/users/" + user.id, updatedUser).catch((err) => {
+      setError(err.message);
+      setUsers(originalUsers);
+    });
   };
 
   return (
