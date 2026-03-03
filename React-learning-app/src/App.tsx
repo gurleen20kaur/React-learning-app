@@ -11,7 +11,7 @@ function App() {
   // returns a promise - has method .then
   useEffect(() => {
     setIsLoading(true);
-    const { request, cancel } = userService.getAllUsers();
+    const { request, cancel } = userService.getAll<User>();
     request
       .then((res) => {
         setUsers(res.data);
@@ -35,7 +35,7 @@ function App() {
     setUsers(users.filter((u) => u.id !== user.id));
 
     // Call server next
-    userService.deleteUser(user.id).catch((err) => {
+    userService.delete(user.id).catch((err) => {
       setError(err.message);
       setUsers(originalUsers);
     });
@@ -49,7 +49,7 @@ function App() {
 
     // Call the server next
     userService
-      .createUser(newUser)
+      .create(newUser)
       .then(({ data: savedUser }) => setUsers([savedUser, ...users]))
       .catch((err) => {
         setError(err.message);
@@ -64,7 +64,7 @@ function App() {
 
     // put = replacing an object
     // patch = updating one or more properties
-    userService.updateUser(updatedUser).catch((err) => {
+    userService.update(updatedUser).catch((err) => {
       setError(err.message);
       setUsers(originalUsers);
     });
